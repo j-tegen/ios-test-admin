@@ -35,7 +35,10 @@ const mutations = {
 }
 
 const actions = {
-  fetchReimbursementTypes: async ({ rootState, commit }, supplier_id) => {
+  fetchReimbursementTypes: async ({ state, rootState, commit }, supplier_id) => {
+    if (state.reimbursement_types.length > 0) {
+      return;
+    }
     commit('beginCall')
     try {
       const { token } = rootState.auth

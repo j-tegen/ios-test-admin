@@ -1,4 +1,5 @@
 import api from '../../api/reclamation'
+import moment from 'moment'
 /* eslint-disable */
 
 const state = {
@@ -10,7 +11,10 @@ const state = {
 
 const getters = {
   allReclamations: state => {
-    return state.reclamations
+    return state.reclamations.map(r => ({
+      delay: moment(r.actual_arrival).diff(r.expected_arrival, 'minutes'),
+      ...r
+    }))
   },
   activeReclamation: state => {
     return state.reclamation
@@ -36,7 +40,10 @@ const mutations = {
 }
 
 const actions = {
-  fetchReclamations: async ({ rootState, commit }) => {
+  fetchReclamations: async ({ state, rootState, commit }) => {
+    if (state.reclamations.length > 0) {
+      return;
+    }
     commit('beginCall')
     try {
       const { token } = rootState.auth

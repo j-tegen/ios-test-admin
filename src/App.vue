@@ -44,4 +44,10 @@ export default {
     margin-right: 0.5em;
   }
 }
+
+th {
+  .v-icon {
+    margin-left: 0.2em;
+  }
+}
 </style>

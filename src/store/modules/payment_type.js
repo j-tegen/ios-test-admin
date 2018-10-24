@@ -38,7 +38,10 @@ const mutations = {
 }
 
 const actions = {
-  fetchPaymentTypes: async ({ rootState, commit }) => {
+  fetchPaymentTypes: async ({ state, rootState, commit }) => {
+    if (state.payment_types.length > 0) {
+      return;
+    }
     commit('beginCall')
     try {
       const { token } = rootState.auth

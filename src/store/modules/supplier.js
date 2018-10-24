@@ -1,6 +1,7 @@
 import api from '../../api/supplier'
 import payment_type from './supplier_payment_type'
 import reimbursement_type from './supplier_reimbursement_type'
+import reclamation from './supplier_reclamation'
 /* eslint-disable */
 
 const state = {
@@ -63,7 +64,10 @@ const mutations = {
 }
 
 const actions = {
-  fetchSuppliers: async ({ rootState, commit }) => {
+  fetchSuppliers: async ({ state, rootState, commit }, force = false) => {
+    if (state.suppliers.length > 0 && !force) {
+      return;
+    }
     commit('beginCall')
     try {
       const { token } = rootState.auth
@@ -166,5 +170,6 @@ export default {
   modules: {
     payment_type,
     reimbursement_type,
+    reclamation,
   }
 }

@@ -1,19 +1,23 @@
 import api from '../../api/supplier'
+import moment from 'moment'
 /* eslint-disable */
 
 const state = {
   loading: false,
   error: '',
-  payment_types: [],
-  payment_type: null,
+  reclamations: [],
+  reclamation: null,
 }
 
 const getters = {
-  allPaymentTypes: state => {
-    return state.payment_types
+  allReclamations: state => {
+    return state.reclamations.map(r => ({
+      delay: moment(r.actual_arrival).diff(r.expected_arrival, 'minutes'),
+      ...r
+    }))
   },
-  activePaymentType: state => {
-    return state.payment_type
+  activeReclamation: state => {
+    return state.reclamation
   },
   isLoading: state => state.loading
 }
@@ -27,26 +31,26 @@ const mutations = {
     state.loading = false
     state.error = error
   },
-  fetchPaymentTypesSuccess: (state, payment_types) => {
-    state.payment_types = payment_types
+  fetchReclamationsSuccess: (state, reclamations) => {
+    state.reclamations = reclamations
     state.loading = false
     state.error = ''
   },
 }
 
 const actions = {
-  fetchPaymentTypes: async ({ state, rootState, commit }, supplier_id) => {
-    if (state.payment_types.length > 0) {
+  fetchReclamations: async ({ state, rootState, commit }, supplier_id) => {
+    if (state.reclamations.length > 0) {
       return;
     }
     commit('beginCall')
     try {
       const { token } = rootState.auth
-      const { data } = await api.fetchPaymentTypes(token, supplier_id)
+      const { data } = await api.fetchReclamations(token, supplier_id)
 
       if (data.status === 'success') {
-        const payment_types = data.data
-        commit('fetchPaymentTypesSuccess', payment_types)
+        const reclamations = data.data
+        commit('fetchReclamationsSuccess', reclamations)
       } else {
         commit('failedCall', data.message)
       }

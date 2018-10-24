@@ -41,7 +41,10 @@ const mutations = {
 }
 
 const actions = {
-  fetchUsers: async ({ rootState, commit }) => {
+  fetchUsers: async ({ state, rootState, commit }) => {
+    if (state.users.length > 0) {
+      return;
+    }
     commit('beginCall')
     try {
       const { token } = rootState.auth

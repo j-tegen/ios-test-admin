@@ -1,16 +1,24 @@
 <template>
 	<v-container fluid grid-list-lg>
-    <v-layout wrap>
-      <v-flex xs12>
+		<v-layout wrap>
+			<v-flex xs12 md6>
 				<supplier-form-card
+					class="full-height"
 					@save="editSupplier"
 					:_supplier="activeSupplier"
 					:isLoading="isLoading">
 				</supplier-form-card>
 			</v-flex>
+			<v-flex xs6>
+				<average-delay-card class="full-height" :reclamations="supplierReclamations"></average-delay-card>
+			</v-flex>
+			<v-flex xs12>
+				<reclamation-table :reclamations="supplierReclamations" :isLoading="isLoadingReclamations"></reclamation-table>
+			</v-flex>
 			<v-flex xs12 md6>
 				<payment-type-table :paymentTypes="supplierPaymentTypes" @connectNew="openConnectPaymentType"></payment-type-table>
 				<connect-related-dialog
+					class="full-height"
 					ref="connectPaymentTypeDialog"
 					:relatedRecords="allPaymentTypes"
 					:title="'Connect payment type'"
@@ -21,6 +29,7 @@
 			<v-flex xs12 md6>
 				<reimbursement-type-table :reimbursementTypes="supplierReimbursementTypes" @connectNew="openConnectReimbursementType"></reimbursement-type-table>
 				<connect-related-dialog
+					class="full-height"
 					ref="connectReimbursementTypeDialog"
 					:relatedRecords="allReimbursementTypes"
 					:title="'Connect reimbursement type'"
@@ -28,7 +37,7 @@
 					icon="mdi-cash"
 				></connect-related-dialog>
 			</v-flex>
-    </v-layout>
+		</v-layout>
 	</v-container>
 </template>
 
@@ -38,6 +47,8 @@ import SupplierFormCard from './SupplierFormCard'
 import PaymentTypeTable from './PaymentTypeTable'
 import ReimbursementTypeTable from './ReimbursementTypeTable'
 import ConnectRelatedDialog from './ConnectRelatedDialog'
+import ReclamationTable from './ReclamationTable'
+import AverageDelayCard from './AverageDelayCard'
 /* eslint-disable */
 
 export default {
@@ -57,6 +68,7 @@ export default {
 		]),
 		...mapActions('supplier/payment_type', ['fetchPaymentTypes']),
 		...mapActions('supplier/reimbursement_type', ['fetchReimbursementTypes']),
+		...mapActions('supplier/reclamation', ['fetchReclamations']),
 		...mapActions('payment_type', {
 			fetchAllPaymentTypes: 'fetchPaymentTypes'
 		}),
@@ -89,6 +101,10 @@ export default {
 			isLoadingRT: 'isLoading',
 			supplierReimbursementTypes: 'allReimbursementTypes',
 		}),
+		...mapGetters('supplier/reclamation', {
+			isLoadingReclamations: 'isLoading',
+			supplierReclamations: 'allReclamations',
+		}),
 		...mapGetters('payment_type', [
 			'allPaymentTypes'
 		]),
@@ -102,23 +118,25 @@ export default {
 			this.fetchSupplier(id)
 			this.fetchPaymentTypes(id)
 			this.fetchReimbursementTypes(id)
-			if ( !this.allPaymentTypes ){
-				this.fetchAllPaymentTypes()
-			}
-			if ( !this.allReimbursementTypes ) {
-				this.fetchAllReimbursementTypes()
-			}
+			this.fetchReclamations(id)
+			this.fetchAllPaymentTypes()
+			this.fetchAllReimbursementTypes()
+
 		}
 	},
 	components: {
 		SupplierFormCard,
 		PaymentTypeTable,
 		ReimbursementTypeTable,
-		ConnectRelatedDialog
+		ConnectRelatedDialog,
+		ReclamationTable,
+		AverageDelayCard,
 	}
 }
 </script>
 
-<style>
-
+<style scoped>
+.full-height {
+	height: 100%;
+}
 </style>
