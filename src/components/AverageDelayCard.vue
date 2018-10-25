@@ -1,7 +1,7 @@
 <template>
-    <v-card color="primary white--text">
-        <v-card-title>
-            <span class="headline">Average delay</span></v-card-title>
+    <v-card >
+        <v-card-title class="primary white--text text-xs-center">
+            <v-icon class="display-4 white--text">mdi-clock-alert-outline</v-icon></v-card-title>
         <v-card-text class="text-xs-center display-4">
             {{ `${average} min` }}
         </v-card-text>

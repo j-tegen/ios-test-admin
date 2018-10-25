@@ -50,4 +50,16 @@ th {
     margin-left: 0.2em;
   }
 }
+
+.table-toolbar {
+  background-color: #fff;
+}
+
+.gradient--text {
+
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
 </style>
