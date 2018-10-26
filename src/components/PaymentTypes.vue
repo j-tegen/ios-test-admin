@@ -4,7 +4,10 @@
 			<v-flex xs12>
 				<v-toolbar class="table-toolbar" flat>
 					<v-toolbar-title>Payment types</v-toolbar-title>
+					<v-spacer />
+					<v-btn round @click="addPaymentTypeForm"><v-icon class="primary--text">mdi-plus</v-icon> Add payment type</v-btn>
 				</v-toolbar>
+				<payment-type-form-dialog ref="paymentTypeForm"></payment-type-form-dialog>
 				<v-data-table
 					:headers="headers"
 					:items="allPaymentTypes"
@@ -30,6 +33,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
+import PaymentTypeFormDialog from './PaymentTypeFormDialog'
 /* eslint-disable */
 export default {
 	name: 'PaymentTypes',
@@ -65,7 +69,13 @@ export default {
 		...mapGetters('payment_type', ['allPaymentTypes', 'isLoading']),
 	},
 	methods: {
-		...mapActions('payment_type', ['fetchPaymentTypes']),
+		...mapActions('payment_type', ['fetchPaymentTypes', 'addPaymentType', 'editPaymentType']),
+		async addPaymentTypeForm() {
+			await this.$refs.paymentTypeForm.open(this.addPaymentType)
+		},
+		async editPaymentTypeForm(paymentType) {
+			await this.$refs.paymentTypeForm.open(this.editPaymentType, paymentType)
+		},
 		relocate(id) {
 			this.$router.push(`/payment_types/${id}`)
 		},
@@ -76,6 +86,9 @@ export default {
 	created() {
 		this.fetchPaymentTypes()
 	},
+	components: {
+		PaymentTypeFormDialog,
+	}
 }
 </script>
 
