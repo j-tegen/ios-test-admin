@@ -69,20 +69,20 @@ export default {
 				datasets: [
 					{
 						label: 'Added battles',
-						backgroundColor: 'rgba(186, 104, 200, 0.7)',
+						backgroundColor: 'rgba(234, 128, 252, 0.8)',
 						pointBorderColor: '#fff',
 						pointBackgroundColor: '#fff',
 						pointRadius: 3,
-						lineColor: '#7B1FA2',
+						lineColor: '#ea80fc',
 						data: this.newReclamations,
 					},
 					{
 						label: 'Won battles',
-						backgroundColor: 'rgba(38, 166, 154, 0.6)',
+						backgroundColor: 'rgba(128, 222, 234, 0.8)',
 						pointBorderColor: '#fff',
 						pointBackgroundColor: '#fff',
 						pointRadius: 3,
-						lineColor: '#00A79D',
+						lineColor: '#80deea',
 						data: this.wonReclamations,
 					}
 				]

@@ -61,11 +61,11 @@ export default {
 				datasets: [
 					{
 					label: 'Registered users',
-					backgroundColor: 'rgba(38, 166, 154, 0.65)',
+					backgroundColor: 'rgba(128, 222, 234, 0.8)',
 					pointBorderColor: '#fff',
 					pointBackgroundColor: '#fff',
 					pointRadius: 3,
-					lineColor: '#00A79D',
+					lineColor: '#80DEEA',
 					data: this.values,
 					}
 				]
