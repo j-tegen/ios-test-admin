@@ -11,6 +11,7 @@ export default {
 	data() {
 		return {
 			options: {
+				defaultFontColor: '#FFF',
 				scales: {
 					xAxes: [{
 						type: 'time',
@@ -20,7 +21,15 @@ export default {
 						}
 					}]
 				},
-				responsive: true, maintainAspectRatio: false
+				legend: {
+					fontColor: '#fff',
+					labels: {
+						fontColor: '#fff',
+					}
+
+				},
+				responsive: true,
+				maintainAspectRatio: false,
 			}
 		}
 	},

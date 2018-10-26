@@ -12,9 +12,9 @@ import router from './router'
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
-    primary: '#00A79D',
+    primary: colors.cyan.lighten2,
     secondary: '#00A79D',
-    accent: colors.purple.darken2,
+    accent: colors.purple.accent1,
     error: colors.red.accent3
   }
 });

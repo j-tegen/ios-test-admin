@@ -1,10 +1,10 @@
 <template>
     <v-card class="gradient white--text">
         <v-card-title class="text-cs-center headline">
-            Average delay
+            Amount refunded
         </v-card-title>
         <v-card-text class="text-xs-center display-3">
-            {{ `${average} min` }}
+            {{ `${totalRefund} kr` }}
         </v-card-text>
     </v-card>
 </template>
@@ -12,18 +12,18 @@
 <script>
 /* eslint-disable */
 export default {
-    name: 'AverageDelayCard',
+    name: 'TotalRefundCard',
     props: [
         'reclamations'
     ],
     computed: {
-        average() {
+        totalRefund() {
             if (this.reclamations.length === 0) {
                 return 0;
             }
             return this.reclamations.reduce((acc, val) => {
-                return val.delay + acc;
-            }, 0) / this.reclamations.length;
+                return parseInt(val.refund) + acc;
+            }, 0);
         }
     }
 }

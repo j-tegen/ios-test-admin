@@ -2,8 +2,8 @@
 	<v-container grid-list-xl fluid>
 		<v-layout column>
 			<v-flex xs12>
-				<v-toolbar class="table-toolbar" color="white" flat>
-					<v-toolbar-title class="primary--text">Payment types</v-toolbar-title>
+				<v-toolbar class="table-toolbar" flat>
+					<v-toolbar-title>Payment types</v-toolbar-title>
 				</v-toolbar>
 				<v-data-table
 					:headers="headers"

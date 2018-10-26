@@ -9,14 +9,17 @@
 					:isLoading="isLoading">
 				</supplier-form-card>
 			</v-flex>
-			<v-flex xs6>
+			<v-flex xs6 md3>
 				<average-delay-card class="full-height" :reclamations="supplierReclamations"></average-delay-card>
 			</v-flex>
+			<v-flex xs6 md3>
+				<total-refund-card class="full-height" :reclamations="supplierReclamations"></total-refund-card>
+			</v-flex>
 			<v-flex xs12>
-				<reclamation-table :reclamations="supplierReclamations" :isLoading="isLoadingReclamations"></reclamation-table>
+				<reclamation-table class="full-height" :reclamations="supplierReclamations" :isLoading="isLoadingReclamations"></reclamation-table>
 			</v-flex>
 			<v-flex xs12 md6>
-				<payment-type-table :paymentTypes="supplierPaymentTypes" @connectNew="openConnectPaymentType"></payment-type-table>
+				<payment-type-table class="full-height" :paymentTypes="supplierPaymentTypes" @connectNew="openConnectPaymentType"></payment-type-table>
 				<connect-related-dialog
 					class="full-height"
 					ref="connectPaymentTypeDialog"
@@ -27,7 +30,7 @@
 				></connect-related-dialog>
 			</v-flex>
 			<v-flex xs12 md6>
-				<reimbursement-type-table :reimbursementTypes="supplierReimbursementTypes" @connectNew="openConnectReimbursementType"></reimbursement-type-table>
+				<reimbursement-type-table class="full-height" :reimbursementTypes="supplierReimbursementTypes" @connectNew="openConnectReimbursementType"></reimbursement-type-table>
 				<connect-related-dialog
 					class="full-height"
 					ref="connectReimbursementTypeDialog"
@@ -49,6 +52,7 @@ import ReimbursementTypeTable from './ReimbursementTypeTable'
 import ConnectRelatedDialog from './ConnectRelatedDialog'
 import ReclamationTable from './ReclamationTable'
 import AverageDelayCard from './AverageDelayCard'
+import TotalRefundCard from './TotalRefundCard'
 /* eslint-disable */
 
 export default {
@@ -131,6 +135,7 @@ export default {
 		ConnectRelatedDialog,
 		ReclamationTable,
 		AverageDelayCard,
+		TotalRefundCard,
 	}
 }
 </script>

@@ -40,9 +40,6 @@ const mutations = {
 
 const actions = {
   fetchReclamations: async ({ state, rootState, commit }, supplier_id) => {
-    if (state.reclamations.length > 0) {
-      return;
-    }
     commit('beginCall')
     try {
       const { token } = rootState.auth

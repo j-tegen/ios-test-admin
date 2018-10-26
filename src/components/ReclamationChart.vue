@@ -11,6 +11,7 @@ export default {
 	data() {
 		return {
 			options: {
+				defaultFontColor: '#FFF',
 				scales: {
 					xAxes: [{
 						type: 'time',
@@ -20,7 +21,16 @@ export default {
 						}
 					}]
 				},
-				responsive: true, maintainAspectRatio: false
+				legend: {
+					fontColor: '#fff',
+					labels: {
+						fontColor: '#fff',
+					}
+
+				},
+				responsive: true,
+				maintainAspectRatio: false,
+
 			}
 		}
 	},
@@ -59,7 +69,7 @@ export default {
 				datasets: [
 					{
 						label: 'Added battles',
-						backgroundColor: 'rgba(123, 31, 162, 0.6)',
+						backgroundColor: 'rgba(186, 104, 200, 0.7)',
 						pointBorderColor: '#fff',
 						pointBackgroundColor: '#fff',
 						pointRadius: 3,

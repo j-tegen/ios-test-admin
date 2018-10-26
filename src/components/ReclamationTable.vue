@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-toolbar class="table-toolbar" color="white" flat>
-            <v-toolbar-title class="primary--text">Battles</v-toolbar-title>
+        <v-toolbar class="table-toolbar" flat>
+            <v-toolbar-title>Battles</v-toolbar-title>
         </v-toolbar>
         <v-data-table
             :headers="headers"

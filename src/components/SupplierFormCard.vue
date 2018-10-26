@@ -37,7 +37,7 @@
 			<v-card-actions>
 				<v-spacer></v-spacer>
 				<v-btn v-if="showCancel" flat round @click.native="cancel">Cancel</v-btn>
-				<v-btn color="white" round @click.native="save"><v-icon class="accent--text">mdi-content-save</v-icon>Save</v-btn>
+				<v-btn round @click.native="save"><v-icon class="primary--text">mdi-content-save</v-icon>Save</v-btn>
 			</v-card-actions>
 		</v-form>
 	</v-card>

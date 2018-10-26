@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app id="app" dark>
     <Nav />
     <v-content>
       <router-view></router-view>
@@ -31,6 +31,33 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+  background: #0f242f;
+}
+
+.theme--dark{
+  &.application {
+    background-color: #0f242f;
+  }
+  .theme--dark.v-table tbody tr:hover:not(.v-datatable__expand-row) {
+    background-color: #2a414c;
+  }
+  &.v-toolbar,
+  &.v-list,
+  &.v-btn {
+    background-color: #1f313c !important;
+  }
+  .v-table,
+  .v-navigation-drawer,
+  .v-card {
+    background-color: #1f313c;
+  }
+  &.v-datatable .v-datatable__actions {
+    background-color: #1f313c;
+  }
+}
+
+
 .v-card__title.spaced {
   padding: 6em 2em 3em 3em;
 }
@@ -56,10 +83,13 @@ th {
 }
 
 .gradient--text {
-
-	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	background: linear-gradient(to right, #30CFD0 0%, #330867 150%);
   color:transparent;
   -webkit-background-clip: text;
   background-clip: text;
+}
+.gradient {
+	background: linear-gradient(to bottom right, #30CFD0 0%, #330867 150%);
+  color: #fff;
 }
 </style>
