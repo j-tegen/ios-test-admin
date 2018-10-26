@@ -11,7 +11,7 @@
             class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <tr @click="relocate(props.item._id)">
+                <tr :key="props.item._id" @click="relocate(props.item._id)">
                     <td class="text-xs-left">{{ formatDate(props.item._created) }}</td>
                     <td class="text-xs-left">{{ props.item.supplier ? props.item.supplier._descriptive : null }}</td>
                     <td class="text-xs-left">{{ props.item.user ? props.item.user._descriptive : null }}</td>

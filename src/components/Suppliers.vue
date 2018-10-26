@@ -16,7 +16,7 @@
 					class="elevation-1"
 				>
 					<template slot="items" slot-scope="props">
-						<tr @click="relocate(props.item._id)">
+						<tr :key="props.item._id" @click="relocate(props.item._id)">
 							<td>{{ props.item._descriptive }}</td>
 							<td class="text-xs-left">{{ props.item.key }}</td>
 							<td class="text-xs-left">{{ props.item._id }}</td>
