@@ -39,12 +39,14 @@ html {
   &.application {
     background-color: #0f242f;
   }
+  &.v-btn:hover,
+  .v-list__tile.v-list__tile--link.theme--dark:hover,
   .theme--dark.v-table tbody tr:hover:not(.v-datatable__expand-row) {
-    background-color: #2a414c;
+    background-color: #2a414c !important;
   }
   &.v-toolbar,
   &.v-list,
-  &.v-btn {
+  .v-btn.theme--dark {
     background-color: #1f313c !important;
   }
   .v-table,

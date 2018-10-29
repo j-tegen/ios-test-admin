@@ -69,7 +69,7 @@ export default {
 				datasets: [
 					{
 						label: 'Added battles',
-						backgroundColor: 'rgba(234, 128, 252, 0.8)',
+						backgroundColor: 'rgba(234, 128, 252, 0.6)',
 						pointBorderColor: '#fff',
 						pointBackgroundColor: '#fff',
 						pointRadius: 3,
@@ -78,7 +78,7 @@ export default {
 					},
 					{
 						label: 'Won battles',
-						backgroundColor: 'rgba(128, 222, 234, 0.8)',
+						backgroundColor: 'rgba(128, 222, 234, 0.7)',
 						pointBorderColor: '#fff',
 						pointBackgroundColor: '#fff',
 						pointRadius: 3,
