@@ -10,10 +10,17 @@
 				</supplier-form-card>
 			</v-flex>
 			<v-flex xs6 md3>
-				<average-delay-card class="full-height" :reclamations="supplierReclamations"></average-delay-card>
+				<key-value-card
+					class="full-height"
+					:value="averageDelay"
+					title="Average delay" unit="min"/>
 			</v-flex>
 			<v-flex xs6 md3>
-				<total-refund-card class="full-height" :reclamations="supplierReclamations"></total-refund-card>
+				<key-value-card
+					class="full-height"
+					:value="totalRefund"
+					title="Refunded money"
+					unit="kr" />
 			</v-flex>
 			<v-flex xs12>
 				<reclamation-table class="full-height" :reclamations="supplierReclamations" :isLoading="isLoadingReclamations"></reclamation-table>
@@ -51,8 +58,7 @@ import PaymentTypeTable from './PaymentTypeTable'
 import ReimbursementTypeTable from './ReimbursementTypeTable'
 import ConnectRelatedDialog from './ConnectRelatedDialog'
 import ReclamationTable from './ReclamationTable'
-import AverageDelayCard from './AverageDelayCard'
-import TotalRefundCard from './TotalRefundCard'
+import KeyValueCard from './KeyValueCard'
 /* eslint-disable */
 
 export default {
@@ -114,7 +120,23 @@ export default {
 		]),
 		...mapGetters('reimbursement_type', [
 			'allReimbursementTypes'
-		])
+		]),
+		averageDelay() {
+            if (this.supplierReclamations.length === 0) {
+                return 0;
+            }
+            return this.supplierReclamations.reduce((acc, val) => {
+                return val.delay + acc;
+            }, 0) / this.supplierReclamations.length;
+		},
+		totalRefund() {
+            if (this.supplierReclamations.length === 0) {
+                return 0;
+            }
+            return this.supplierReclamations.reduce((acc, val) => {
+                return parseInt(val.refund) + acc;
+            }, 0);
+        }
 	},
 	mounted() {
 		const { id } = this.$router.history.current.params
@@ -134,8 +156,7 @@ export default {
 		ReimbursementTypeTable,
 		ConnectRelatedDialog,
 		ReclamationTable,
-		AverageDelayCard,
-		TotalRefundCard,
+		KeyValueCard,
 	}
 }
 </script>
