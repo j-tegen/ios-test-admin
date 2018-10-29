@@ -24,7 +24,6 @@
 						</tr>
 					</template>
 				</v-data-table>
-
 			</v-flex>
 		</v-layout>
 	</v-container>

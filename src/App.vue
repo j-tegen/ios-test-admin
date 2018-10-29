@@ -50,6 +50,7 @@ html {
     background-color: #1f313c !important;
   }
   .v-table,
+  .v-expansion-panel__header,
   .v-navigation-drawer,
   .v-card {
     background-color: #1f313c;

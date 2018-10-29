@@ -6,8 +6,9 @@ import Suppliers from '../components/Suppliers'
 import SupplierDetails from '../components/SupplierDetails'
 import Reclamations from '../components/Reclamations'
 import Users from '../components/Users'
-import PaymentTypes from '../components/PaymentTypes.vue'
-import ReimbursementTypes from '../components/ReimbursementTypes.vue'
+import PaymentTypes from '../components/PaymentTypes'
+import ReimbursementTypes from '../components/ReimbursementTypes'
+import UserDetails from '../components/UserDetails'
 import store from '../store'
 /* eslint-disable */
 Vue.use(VueRouter)
@@ -42,6 +43,10 @@ const router = new VueRouter({
     {
         path: '/users',
         component: Users,
+    },
+    {
+        path: '/users/:id',
+        component: UserDetails,
     },
     {
         path: '/payment_types',

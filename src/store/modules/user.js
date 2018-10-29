@@ -1,3 +1,4 @@
+import moment from 'moment'
 import api from '../../api/user'
 /* eslint-disable */
 
@@ -5,7 +6,10 @@ const state = {
   loading: false,
   error: '',
   users: [],
-  user: null,
+  user: {
+    reclamations: [],
+    supplier_user_infos: [],
+  },
 }
 
 const getters = {
@@ -64,14 +68,43 @@ const actions = {
     commit('beginCall')
     try {
       const { token } = rootState.auth
-      const { data } = await api.fetch(token, id)
 
-      if (data.status === 'success') {
-        const user = data.data
-        commit('fetchUserSuccess', user)
-      } else {
+      const userResponse = await api.fetch(token, id)
+      if (userResponse.data.status !== 'success') {
         commit('failedCall', data.message)
+        return
       }
+
+      const reclamationsResponse = await api.fetchReclamations(token, id)
+      if (reclamationsResponse.data.status !== 'success') {
+        commit('failedCall', data.message)
+        return
+      }
+
+      const supplierUserInfoResponse = await api.fetchSupplierUserInfo(token, id)
+      if (supplierUserInfoResponse.data.status !== 'success') {
+        commit('failedCall', data.message)
+        return
+      }
+
+
+      let user = userResponse.data.data
+
+      const reclamations = reclamationsResponse.data.data.map(r => (
+        {
+          ...r,
+          delay: moment(r.actual_arrival).diff(r.expected_arrival, 'minutes'),
+        }
+      ))
+
+      user = {
+        ...user,
+        reclamations,
+        supplier_user_infos: supplierUserInfoResponse.data.data,
+      }
+
+      commit('fetchUserSuccess', user)
+
     } catch(e) {
       commit('failedCall', e)
     }
