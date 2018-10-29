@@ -12,19 +12,21 @@
             class="elevation-1"
         >
             <template slot="items" slot-scope="props" >
-                <td>{{ props.item._descriptive }}</td>
-                <td class="text-xs-left">{{ props.item.key }}</td>
-                <td class="text-xs-left">{{ props.item._id }}</td>
-				<td>
-					<v-tooltip bottom class="justify-center layout px-0">
-						<v-icon small
-							slot="activator"
-							class="mr-2"
-							@click="disconnect(props.item._id)">mdi-link-off
-						</v-icon>
-						<span>Disconnect this reimbursement type</span>
-					</v-tooltip>
-				</td>
+				<tr :key="props.item._id">
+					<td>{{ props.item._descriptive }}</td>
+					<td class="text-xs-left">{{ props.item.key }}</td>
+					<td class="text-xs-left">{{ props.item._id }}</td>
+					<td>
+						<v-tooltip bottom class="justify-center layout px-0">
+							<v-icon small
+								slot="activator"
+								class="mr-2"
+								@click="disconnect(props.item._id)">mdi-link-off
+							</v-icon>
+							<span>Disconnect this reimbursement type</span>
+						</v-tooltip>
+					</td>
+				</tr>
             </template>
         </v-data-table>
     </div>

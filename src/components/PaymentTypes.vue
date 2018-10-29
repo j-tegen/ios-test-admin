@@ -16,7 +16,7 @@
 					class="elevation-1"
 				>
 					<template slot="items" slot-scope="props">
-						<tr :key="props.item._id" @click="relocate(props.item._id)">
+						<tr :key="props.item._id" @click="editPaymentTypeForm(props.item)">
 							<td class="text-xs-left">{{ formatDate(props.item._created) }}</td>
                             <td class="text-xs-left">{{ props.item.name }}</td>
 							<td class="text-xs-left">{{ props.item.key }}</td>

@@ -4,7 +4,10 @@
 			<v-flex xs12>
 				<v-toolbar class="table-toolbar" flat>
 					<v-toolbar-title>Reimbursement types</v-toolbar-title>
+					<v-spacer />
+					<v-btn round @click="addReimbursementTypeForm"><v-icon class="primary--text">mdi-plus</v-icon> Add reimbursement type</v-btn>
 				</v-toolbar>
+				<reimbursement-type-form-dialog ref="reimbursementTypeForm"></reimbursement-type-form-dialog>
 				<v-data-table
 					:headers="headers"
 					:items="allReimbursementTypes"
@@ -13,7 +16,7 @@
 					class="elevation-1"
 				>
 					<template slot="items" slot-scope="props">
-						<tr :key="props.item._id" @click="relocate(props.item._id)">
+						<tr :key="props.item._id" @click="editReimbursementTypeForm(props.item)">
 							<td class="text-xs-left">{{ formatDate(props.item._created) }}</td>
                             <td class="text-xs-left">{{ props.item.name }}</td>
 							<td class="text-xs-left">{{ props.item.key }}</td>
@@ -30,6 +33,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
+import ReimbursementTypeFormDialog from './ReimbursementTypeFormDialog'
 /* eslint-disable */
 export default {
 	name: 'ReimbursementTypes',
@@ -65,7 +69,13 @@ export default {
 		...mapGetters('reimbursement_type', ['allReimbursementTypes', 'isLoading']),
 	},
 	methods: {
-		...mapActions('reimbursement_type', ['fetchReimbursementTypes']),
+		...mapActions('reimbursement_type', ['fetchReimbursementTypes', 'addReimbursementType', 'editReimbursementType']),
+		async addReimbursementTypeForm() {
+			await this.$refs.reimbursementTypeForm.open(this.addReimbursementType)
+		},
+		async editReimbursementTypeForm(reimbursementType) {
+			await this.$refs.reimbursementTypeForm.open(this.editReimbursementType, reimbursementType)
+		},
 		relocate(id) {
 			this.$router.push(`/reimbursement_types/${id}`)
 		},
@@ -76,6 +86,9 @@ export default {
 	created() {
 		this.fetchReimbursementTypes()
 	},
+	components: {
+		ReimbursementTypeFormDialog,
+	}
 }
 </script>
 
