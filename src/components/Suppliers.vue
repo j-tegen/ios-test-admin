@@ -3,7 +3,7 @@
 		<v-layout column>
 			<v-flex xs12>
 				<v-toolbar class="table-toolbar" flat>
-					<v-toolbar-title class="primary--text">Suppliers</v-toolbar-title>
+					<v-toolbar-title >Suppliers</v-toolbar-title>
 					<v-spacer></v-spacer>
 					<v-btn round @click="addSupplierForm"><v-icon class="primary--text">mdi-plus</v-icon> Add supplier</v-btn>
 				</v-toolbar>

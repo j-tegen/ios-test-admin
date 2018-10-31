@@ -16,7 +16,10 @@
                     <td class="text-xs-left">{{ props.item.supplier ? props.item.supplier._descriptive : null }}</td>
                     <td class="text-xs-left">{{ props.item.user ? props.item.user._descriptive : null }}</td>
                     <td class="text-xs-left">{{ `${props.item.delay} min` }}
-                    <td class="text-xs-left"><v-icon small>{{ getApprovedIcon(props.item.approved) }}</v-icon></td>
+                    <td class="text-xs-left">
+                        <v-icon v-if="props.item.approved" small color="green">mdi-thumb-up</v-icon>
+                        <v-icon v-else small color="red">mdi-thumb-down</v-icon>
+                    </td>
                     <td class="text-xs-left">{{ `${props.item.refund} kr` }}</td>
                 </tr>
             </template>
@@ -72,9 +75,6 @@ export default {
 		formatDate(date) {
 			return moment(date).format('YYYY-MM-DD HH:mm')
         },
-        getApprovedIcon(approved) {
-            return approved ? 'mdi-thumb-up' : 'mdi-thumb-down'
-        }
     },
     props: [
         'reclamations',
