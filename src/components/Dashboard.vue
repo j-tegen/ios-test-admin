@@ -9,7 +9,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex cs12 lg6>
+      <v-flex xs12 lg6>
         <v-card>
           <v-card-title>New battles</v-card-title>
           <v-card-text>

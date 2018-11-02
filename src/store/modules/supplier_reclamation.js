@@ -12,8 +12,12 @@ const state = {
 const getters = {
   allReclamations: state => {
     return state.reclamations.map(r => ({
+      ...r,
       delay: moment(r.actual_arrival).diff(r.expected_arrival, 'minutes'),
-      ...r
+      from_station: r.from_station ? r.from_station._descriptive : '',
+      to_station: r.to_station ? r.to_station._descriptive : '',
+      payment_type: r.payment_type ? r.payment_type._descriptive : '',
+      reimbursement_type: r.reimbursement_type ? r.reimbursement_type._descriptive : '',
     }))
   },
   activeReclamation: state => {

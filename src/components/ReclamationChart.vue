@@ -59,7 +59,7 @@ export default {
 		wonReclamations() {
 			return this.dates.map(d => (
 				this.reclamations.filter(r => r.approved).reduce((acc, reclamation) => (
-					this.reclamations.reduce((acc, reclamation) => this.isSameDay(moment(reclamation._created), d) ? acc + 1 : acc, 0)
+					this.isSameDay(moment(reclamation._created), d) ? acc + 1 : acc
 				), 0)
 			))
 		},

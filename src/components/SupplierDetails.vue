@@ -47,6 +47,14 @@
 					icon="mdi-cash"
 				></connect-related-dialog>
 			</v-flex>
+			<v-flex xs12 md12>
+				<v-card class="full-height">
+					<v-card-title>Battles</v-card-title>
+					<v-card-text>
+						<reclamation-chart v-if="!isLoadingReclamations" :isLoading="isLoadingReclamations" :reclamations="supplierReclamations"></reclamation-chart>
+					</v-card-text>
+				</v-card>
+			</v-flex>
 		</v-layout>
 	</v-container>
 </template>
@@ -59,6 +67,7 @@ import ReimbursementTypeTable from './ReimbursementTypeTable'
 import ConnectRelatedDialog from './ConnectRelatedDialog'
 import ReclamationTable from './ReclamationTable'
 import KeyValueCard from './KeyValueCard'
+import ReclamationChart from './ReclamationChart'
 /* eslint-disable */
 
 export default {
@@ -157,6 +166,7 @@ export default {
 		ConnectRelatedDialog,
 		ReclamationTable,
 		KeyValueCard,
+		ReclamationChart,
 	}
 }
 </script>

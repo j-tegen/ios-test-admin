@@ -4,25 +4,44 @@
             <v-toolbar-title>Battles</v-toolbar-title>
         </v-toolbar>
         <v-data-table
-            :headers="headers"
+            :headers="computedHeaders"
             :items="reclamations"
             :pagination.sync="pagination"
             :loading="isLoading"
             class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <tr :key="props.item._id" @click="relocate(props.item._id)">
-                    <td class="text-xs-left">{{ formatDate(props.item._created) }}</td>
-                    <td class="text-xs-left">{{ props.item.supplier ? props.item.supplier._descriptive : null }}</td>
-                    <td class="text-xs-left">{{ props.item.user ? props.item.user._descriptive : null }}</td>
-                    <td class="text-xs-left">{{ `${props.item.delay} min` }}
+                <tr :key="props.item._id" @click="relocate(`/reclamations/${props.item._id}`)">
                     <td class="text-xs-left">
+                        {{ formatDate(props.item._created) }}
+                    </td>
+                    <td class="text-xs-left">
+                        <a v-if="props.item.supplier" @click.stop="relocate(`/suppliers/${props.item.supplier._id}`)">
+                            {{props.item.supplier._descriptive}}
+                        </a>
+                    </td>
+                    <td class="text-xs-left">
+                        <a v-if="props.item.user" @click.stop="relocate(`/users/${props.item.user._id}`)">
+                            {{props.item.user._descriptive}}
+                        </a>
+                    </td>
+                    <td class="text-xs-left">{{ `${props.item.delay} min` }}</td>
+                    <td class="text-xs-center">
                         <v-icon v-if="props.item.approved" small color="green">mdi-thumb-up</v-icon>
                         <v-icon v-else small color="red">mdi-thumb-down</v-icon>
                     </td>
-                    <td class="text-xs-left">{{ `${props.item.refund} kr` }}</td>
+                    <td class="text-xs-right">{{ `${props.item.refund} kr` }}</td>
+                    <td class="text-xs-left">{{ props.item.from_station }}</td>
+                    <td class="text-xs-left">{{ props.item.to_station }}</td>
+                    <td class="text-xs-left">{{ props.item.payment_type }}</td>
+                    <td class="text-xs-left">{{ props.item.reimbursement_type }}</td>
                 </tr>
             </template>
+            <tr>
+                <template v-for="header in computedHeaders">
+                    <td :key="header.value">Test</td>
+                </template>
+            </tr>
         </v-data-table>
     </div>
 </template>
@@ -32,6 +51,11 @@ import moment from 'moment'
 
 export default {
     name: 'ReclamationTable',
+    computed: {
+        computedHeaders () {
+            return this.headers.filter(h => !h.hide || !this.$vuetify.breakpoint[h.hide])
+        }
+    },
     data() {
 		return {
 			pagination: {
@@ -65,12 +89,28 @@ export default {
 					text: 'Refunded amount',
 					value: 'refund',
 				},
+                {
+                    text: 'From station',
+                    value: 'from_station',
+                },
+                {
+                    text: 'To station',
+                    value: 'to_station',
+                },
+                {
+                    text: 'Payment type',
+                    value: 'payment_type',
+                },
+                {
+                    text: 'Reimbursement type',
+                    value: 'reimbursement_type',
+                },
 			]
 		}
     },
     methods: {
-        relocate(id) {
-			this.$router.push(`/reclamations/${id}`)
+        relocate(url) {
+			this.$router.push(url)
 		},
 		formatDate(date) {
 			return moment(date).format('YYYY-MM-DD HH:mm')
@@ -100,5 +140,9 @@ td.actions > * {
 
 tbody > tr {
 	cursor: pointer;
+}
+
+table.v-table tbody td, table.v-table tbody th {
+    white-space: nowrap;
 }
 </style>

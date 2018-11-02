@@ -54,6 +54,14 @@
             <v-flex>
 				<reclamation-table :reclamations="activeUser.reclamations" :isLoading="isLoading"></reclamation-table>
 			</v-flex>
+            <v-flex xs12 lg12>
+                <v-card>
+                    <v-card-title>Battles</v-card-title>
+                    <v-card-text>
+                        <ReclamationChart v-if="!isLoading" :reclamations="activeUser.reclamations"></ReclamationChart>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
 		</v-layout>
 	</v-container>
 </template>
@@ -62,6 +70,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 import ReclamationTable from'./ReclamationTable'
+import ReclamationChart from './ReclamationChart'
 import SupplierUserInfoList from './SupplierUserInfoList'
 
 /* eslint-disable */
@@ -90,7 +99,8 @@ export default {
 	},
 	components: {
         ReclamationTable,
-        SupplierUserInfoList
+        SupplierUserInfoList,
+        ReclamationChart
 	}
 }
 </script>
